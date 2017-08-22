@@ -1,0 +1,4 @@
+<?php
+	$home = new HomeModel();
+?>
+
