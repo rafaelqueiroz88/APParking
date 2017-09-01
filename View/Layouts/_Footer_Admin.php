@@ -1,5 +1,7 @@
 <?php
-	 $home = new HomeModel($db);
+	$database = new Database();
+	$db = $database->getConnection();
+	$home = new HomeModel($db);
 ?>
 
 		</main>
@@ -13,5 +15,6 @@
 		<script type="text/javascript" src="./Public/js/bootstrap.js"></script>
 		<script type="text/javascript" src="./Public/js/bootbox.min.js"></script>
 		<script type="text/javascript" src="./Public/js/fieldmask.js"></script>
+		<script type="text/javascript" src="./Public/js/admin_init.js"></script>
 	</body>
 </html>

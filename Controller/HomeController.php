@@ -18,6 +18,9 @@
 				case 'CadastroEstabelecimento':
 					include "./View/Admin/Estabelecimentos/Cadastro.php";
 					break;
+				case 'CadastroEndereco':
+					include "./View/Admin/Estabelecimentos/CadastroEndereco.php";
+					break;
 			}
 			
 		}

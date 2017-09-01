@@ -22,8 +22,8 @@
 						<table class="table table-striped table-hover" align="center">
 							<thead>
 								<tr>
-									<th>Nome</th>
-									<th>Quantidade de Vagas</th>
+									<th>Razão Social</th>
+									<th>Nome Fantasia</th>
 								</tr>
 							</thead>
 							<tbody>
