@@ -21,6 +21,9 @@
 				case 'CadastroEndereco':
 					include "./View/Admin/Estabelecimentos/CadastroEndereco.php";
 					break;
+				case 'CadastroCidade':
+					include "./View/Admin/Cidades/Cadastro.php";
+					break;
 			}
 			
 		}

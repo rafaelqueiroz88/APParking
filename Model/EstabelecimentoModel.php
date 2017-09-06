@@ -131,6 +131,8 @@
 	{
 		private $conn;
 		private $tbl_cidades = "prk_cidades";
+		public $nome;
+		public $estadoID;
 		public function __construct($db)
         {
             $this->conn = $db;
@@ -151,6 +153,44 @@
 				}
 			}
 		}
+		public function CadastrarCidade()
+		{
+			$query = "INSERT INTO ".$this->tbl_cidades."
+			 (cid_descricao, cid_etd_id)
+			 VALUES 
+			 (?, ?)";
+			$stmt = $this->conn->prepare($query);
+			$this->nome = htmlspecialchars(strip_tags($this->nome));
+			$this->estadoID = htmlspecialchars(strip_tags($this->estadoID));
+			$stmt->bindParam(1, $this->nome);
+			$stmt->bindParam(2, $this->estadoID);
+			if($stmt->execute())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public function AvisoSucesso()
+		{
+			echo "<div class='alert alert-success' id='aviso_sucesso'>";
+			echo "<p align='center'>";
+			echo "Cidade cadastrada com sucesso!";
+			echo "</p>";
+			echo "<p align='center'>";
+			echo "<a type='button' href='./pagina=Admin' class='btn btn-success'>";
+			echo "<span class='glyphicon glyphicon-home'></span> Retornar";
+			echo "</a>";
+			echo "</p>";
+			echo "</div>";
+		}
+		public function AvisoFalha()
+		{
+			echo "<div class='alert alert-danger' id='aviso_falha' data-dismiss='alert' aria-label='Close'>";
+			echo "</div>";
+		}		
 	}
 	class Localizacoes
 	{
