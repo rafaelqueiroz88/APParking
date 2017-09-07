@@ -24,6 +24,9 @@
 				case 'CadastroCidade':
 					include "./View/Admin/Cidades/Cadastro.php";
 					break;
+				case 'CadastroEstado':
+					include "./View/Admin/Estados/Cadastro.php";
+					break;
 			}
 			
 		}

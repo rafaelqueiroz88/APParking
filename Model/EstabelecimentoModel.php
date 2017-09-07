@@ -106,10 +106,30 @@
 	{
 		private $conn;
 		private $tbl_estados = "prk_estados";
+		public $estadoID;
+		public $nome;
 		public function __construct($db)
         {
             $this->conn = $db;
-        }
+		}
+		public function CadastrarEstado()
+		{
+			$query = "INSERT INTO ".$this->tbl_estados."
+			 (etd_descricao)
+			 VALUES 
+			 (?)";
+			$stmt = $this->conn->prepare($query);
+			$this->nome = htmlspecialchars(strip_tags($this->nome));
+			$stmt->bindParam(1, $this->nome);
+			if($stmt->execute())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		public function ListarEstadosSelect()
 		{
 			$query = "SELECT * FROM ".$this->tbl_estados;
@@ -126,11 +146,30 @@
 				}
 			}
 		}
+		public function AvisoSucesso()
+		{
+			echo "<div class='alert alert-success' id='aviso_sucesso'>";
+			echo "<p align='center'>";
+			echo "Estado cadastrado com sucesso!";
+			echo "</p>";
+			echo "<p align='center'>";
+			echo "<a type='button' href='./?pagina=Admin' class='btn btn-success'>";
+			echo "<span class='glyphicon glyphicon-home'></span> Retornar";
+			echo "</a>";
+			echo "</p>";
+			echo "</div>";
+		}
+		public function AvisoFalha()
+		{
+			echo "<div class='alert alert-danger' id='aviso_falha' data-dismiss='alert' aria-label='Close'>";
+			echo "</div>";
+		}
 	}
 	class Cidades
 	{
 		private $conn;
 		private $tbl_cidades = "prk_cidades";
+		public $cidadeID;
 		public $nome;
 		public $estadoID;
 		public function __construct($db)
@@ -180,7 +219,7 @@
 			echo "Cidade cadastrada com sucesso!";
 			echo "</p>";
 			echo "<p align='center'>";
-			echo "<a type='button' href='./pagina=Admin' class='btn btn-success'>";
+			echo "<a type='button' href='./?pagina=Admin' class='btn btn-success'>";
 			echo "<span class='glyphicon glyphicon-home'></span> Retornar";
 			echo "</a>";
 			echo "</p>";
