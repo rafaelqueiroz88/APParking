@@ -1,2 +1,2 @@
 <?php
-	include "Admin/Home.php";
+	include "Admin/Login.php";

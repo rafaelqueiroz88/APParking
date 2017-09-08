@@ -7,3 +7,6 @@ main{
 	margin-top: 20px;
 	flex: 1 0 auto;
 }
+h1, h2, h3, h4, h5, h6{
+	text-transform: uppercase;
+}

@@ -40,6 +40,10 @@
 		}
 		public function Index()
 		{
+			include "./View/Login.php";
+		}
+		public function Home()
+		{
 			include "./View/Home.php";
 		}
 	}

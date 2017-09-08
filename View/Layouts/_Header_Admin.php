@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	$database = new Database();
 	$db = $database->getConnection();
 	$home = new HomeModel($db);

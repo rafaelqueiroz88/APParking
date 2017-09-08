@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	$home = new HomeModel();
 ?>
 <!DOCTYPE html>
