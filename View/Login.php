@@ -2,6 +2,10 @@
     include "./Model/AdminModel.php";
     $database = new Database();
     $db = $database->getConnection();
+    if(isset($_SESSION["login_admin"]))
+    {
+        header("location:./?pagina=Home");
+    }
     if($_POST)
     {
         $admin = new Adminmodel($db);

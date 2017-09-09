@@ -29,6 +29,7 @@
 				{
 					extract($row);
 					$_SESSION["id_admin"] = $row["adm_id"];
+					$_SESSION["id_admin_est"] = $row["adm_est_id"];
 					$_SESSION["login_admin"] = $row["adm_login"];
 				}
 				return true;

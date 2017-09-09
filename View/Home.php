@@ -1,43 +1,66 @@
 <?php
 	$home = new HomeModel();
+	include "./Model/EstabelecimentoModel.php";
+	$database = new Database();
+    $db = $database->getConnection();
+	$estabelecimentos = new Estabelecimentos($db);
+	$estabelecimentos->VerDetalhesEstabelecimento();
 	if(!isset($_SESSION["login_admin"]))
 	{
 		header("location:./?page=Index");
-	}
-	else
-	{
-		echo $_SESSION["login_admin"];
 	}
 ?>
 
 			<div class="container">
 				<div class="row section">
-					<div class="col s12 m12">
-						<h1> <?php echo $home->VerTituloSite(); ?> </h1>
+					<div class="col s12 m12 center">						
+						<h2><?php echo $home->VerTituloSite(); ?></h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col s12 m12">
+					<div class="col s12 m12 center">
 						<p>
-							<h2> nome do cliente </h2>
+							<h3>
+								<?php
+									echo $estabelecimentos->nomeFantasia;
+								?>
+							</h3>
 						</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s12 m12">
 						<p>
-							<h3> estacionamento hoje </h3>
+							<h5>estacionamento hoje</h5>
 						</p>
+						<hr/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 m12">
+						Você possui um total de:
+						<?php
+							echo $estabelecimentos->qtdVagas;
+							$disponiveis = $estabelecimentos->qtdVagas;
+						?>
+						vagas.
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 m12">
+						<?php
+							echo $estabelecimentos->qtdVagas;
+						?>
+						de suas vagas estão ocupadas no momento.
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s12 m6">
-						<p>
-							70% das vagas estão ocupadas no momento
-							<div class="progress">							
-								<div class="determinate" style="width: 70%"></div>
-							</div>
-						</p>
+						Você possui: <?php $estabelecimentos->VerVagasDisponiveis($disponiveis); ?> vagas disponíveis até o momento.
+						<h5>Disponibilidade de vagas</h5>
+						<?php
+							$estabelecimentos->MostrarVagasDashBoard($disponiveis);
+						?>
 					</div>
 				</div>
 			</div>

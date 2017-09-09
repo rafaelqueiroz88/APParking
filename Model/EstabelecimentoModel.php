@@ -3,6 +3,7 @@
 	{
 		private $conn;
 		private $tbl_estabelecimentos = "prk_estabelecimentos";
+		private $tbl_estacionamentos = "prk_estacionamentos";
 		public $estabelecimentoID;
 		public $razaoSocial;
 		public $nomeFantasia;
@@ -82,6 +83,51 @@
 			{
 				return false;
 			}
+		}
+		public function VerDetalhesEstabelecimento()
+		{
+			$query = "SELECT * FROM ".$this->tbl_estabelecimentos." WHERE est_id = 21";
+			$stmt = $this->conn->prepare($query);
+			$stmt->bindParam(1, $_SESSION["id_admin_est"]);
+			$stmt->execute();
+			$num = $stmt->rowCount();
+			if($num > 0)
+			{
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+				extract($row);
+				$this->estabelecimentoID = $row["est_id"];
+				$this->nomeFantasia = $row["est_nome"];
+				$this->razaoSocial = $row["est_razao_social"];
+				$this->qtdVagas = $row["est_quantidade_vagas"];
+				//echo $this->nomeFantasia;
+			}
+		}
+		public function VerVagasDisponiveis($quantidade)
+		{
+			$query = "SELECT * FROM ".$this->tbl_estabelecimentos." 
+			INNER JOIN ".$this->tbl_estacionamentos." 
+			WHERE ".$this->tbl_estabelecimentos.".est_id = ".$this->tbl_estacionamentos.".ets_est_id";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			$num = $stmt->rowCount();
+			echo $quantidade - $num;
+		}
+		public function MostrarVagasDashBoard($disponiveis)
+		{
+			//Quando possuir um módulo de entrada de veículos, atualizar a query para buscar somente carros que entraram mas não saíram
+			$query = "SELECT * FROM ".$this->tbl_estabelecimentos." 
+			INNER JOIN ".$this->tbl_estacionamentos." 
+			WHERE ".$this->tbl_estabelecimentos.".est_id = ".$this->tbl_estacionamentos.".ets_est_id 
+			AND ets_valor is null";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			$num = $stmt->rowCount();
+			$x = $num * 100;
+			$resultado = $x / $disponiveis;
+			echo "<b>".number_format($resultado, 2)."%</b> das vagas estão ocupadas conforme o gráfico";
+			echo "<div class='progress'>";
+				echo "<div class='determinate' style='width: $resultado%'></div>";
+			echo "</div>";
 		}
 		public function AvisoSucesso()
 		{
