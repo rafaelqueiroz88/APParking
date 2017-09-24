@@ -4,6 +4,7 @@
 		private $conn;
 		private $tbl_estabelecimentos = "prk_estabelecimentos";
 		private $tbl_estacionamentos = "prk_estacionamentos";
+		private $tbl_precos = "prk_precos";
 		public $estabelecimentoID;
 		public $razaoSocial;
 		public $nomeFantasia;
@@ -14,6 +15,12 @@
 		public $telefone;
 		public $qtdVagas;
 		public $entrada;
+		//Dados para uso exclusivo da tabela de preços
+		public $tempoMinimo;
+		public $precoMinimo;
+		public $adicional;
+		public $fator;
+		public $montante;
 		public function __construct($db)
         {
             $this->conn = $db;
@@ -128,6 +135,44 @@
 			echo "<div class='progress'>";
 				echo "<div class='determinate' style='width: $resultado%'></div>";
 			echo "</div>";
+		}
+		public function MostrarFinanceiroEntradaDashBoard()
+		{
+			$query = "SELECT * FROM ".$this->tbl_precos." 
+			INNER JOIN ".$this->tbl_estabelecimentos." 
+			WHERE ".$this->tbl_precos.".prc_est_id = ".$this->tbl_estabelecimentos.".est_id";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			$num = $stmt->rowCount();
+			if($num > 0)
+			{
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+				$this->fator = $row["prc_fator"];
+				$this->adicional = $row["prc_adicional"];
+				$this->precoMinimo = $row["prc_preco_minimo"];
+				$q = "SELECT * FROM ".$this->tbl_estabelecimentos." 
+				INNER JOIN ".$this->tbl_estacionamentos." 
+				WHERE ".$this->tbl_estabelecimentos.".est_id = ".$this->tbl_estacionamentos.".ets_est_id 
+				AND ets_valor is null";
+				$s = $this->conn->prepare($q);
+				$s->execute();
+				$n = $s->rowCount();
+				$this->montante = $n * $this->precoMinimo;
+				echo "<b>R$ ".number_format($this->montante, 2)."</b> no período de: ".$this->fator." hora";
+				echo "<br/>";
+				//echo date("Y.m - h:i:sa", time());
+				echo date_default_timezone_set("America/Sao_Paulo");
+			}
+			else
+			{
+				echo "Nenhuma tabela foi cadastrada para calcular valores";
+			}
+			/*
+			echo "<b> R$ ".number_format($resultado, 2).",00</b>";
+			echo "<div class='progress'>";
+				echo "<div class='determinate' style='width: $resultado%'></div>";
+			echo "</div>";
+			*/
 		}
 		public function AvisoSucesso()
 		{

@@ -15,19 +15,64 @@
 		<nav>
 			<div class="nav-wrapper black">
 				<div class="container">
-					<a href="#!" class="brand-logo"> <?php $home->VerTituloSite(); ?> </a>
-					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+					<a href="./" class="brand-logo">
+						<?php $home->VerTituloSite(); ?>
+						<i class="material-icons left">directions_car</i>
+					</a>
+					<a href="#" data-activates="mobile-demo" class="button-collapse">
+						<i class="material-icons">menu</i>
+					</a>
 					<ul class="right hide-on-med-and-down">
-						<li><a href="sass.html">Sass</a></li>
-						<li><a href="badges.html">Components</a></li>
-						<li><a href="collapsible.html">Javascript</a></li>
-						<li><a href="mobile.html">Mobile</a></li>
+						<li>
+							<a href="./?pagina=SolicitarReparo">
+								<i class="material-icons left">build</i>
+								Solicitações
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=Configuracoes">
+							<i class="material-icons left">attach_money</i>
+								Tabela de Preços
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=Configuracoes">
+								<i class="material-icons left">dashboard</i>
+								Configurações
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=LogOff">
+								<i class="material-icons left">exit_to_app</i>
+								Sair
+							</a>
+						</li>
 					</ul>
-						<ul class="side-nav" id="mobile-demo">
-						<li><a href="sass.html">Sass</a></li>
-						<li><a href="badges.html">Components</a></li>
-						<li><a href="collapsible.html">Javascript</a></li>
-						<li><a href="mobile.html">Mobile</a></li>
+					<ul class="side-nav" id="mobile-demo">
+						<li>
+							<a href="./?pagina=SolicitarReparo">
+								<i class="material-icons right">build</i>
+								Solicitações
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=Configuracoes">
+							<i class="material-icons right">attach_money</i>
+								Tabela de Preços
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=Configuracoes">
+								<i class="material-icons right">dashboard</i>
+								Configurações
+							</a>
+						</li>
+						<li>
+							<a href="./?pagina=LogOff">
+								<i class="material-icons right">exit_to_app</i>
+								Sair
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>				

@@ -46,4 +46,8 @@
 		{
 			include "./View/Home.php";
 		}
+		public function SolicitarReparo()
+		{
+			include "./View/Reparos.php";
+		}
 	}

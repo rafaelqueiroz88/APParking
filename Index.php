@@ -17,6 +17,11 @@
 			$controller->Home();
 			$controller->Footer();
 			break;
+		case 'SolicitarReparo':
+			$controller->Header();
+			$controller->SolicitarReparo();
+			$controller->Footer();
+			break;
 		case 'Admin':
 			$controller->HeaderAdmin();
 			$controller->IndexAdmin($admin);
